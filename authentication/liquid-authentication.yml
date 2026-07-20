@@ -1,0 +1,71 @@
+generated: '2026-07-19'
+method: searched
+source: https://coinvest.liquid.trade/.well-known/oauth-authorization-server
+docs: https://www.liquid.trade/coinvest-docs
+notes: >-
+  Liquid publishes no public REST API and no OpenAPI, so this profile is not derived from a spec. It is
+  transcribed from the live OAuth 2.0 Authorization Server Metadata (RFC 8414) and Protected Resource
+  Metadata (RFC 9728) documents served by the Co-Invest MCP host, plus the provider's Co-Invest
+  documentation. End users authenticate to the product itself with email sign-in or a crypto wallet;
+  machine/agent access is exclusively OAuth against the MCP server.
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - authorization_code
+  - refresh_token
+  pkce: S256
+  dynamic_client_registration: true
+  bearer_methods:
+  - header
+schemes:
+- name: CoInvestOAuth
+  type: oauth2
+  applies_to: https://coinvest.liquid.trade/mcp
+  sources:
+  - https://coinvest.liquid.trade/.well-known/oauth-authorization-server
+  - https://coinvest.liquid.trade/.well-known/oauth-protected-resource
+  issuer: https://coinvest.liquid.trade
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://coinvest.liquid.trade/oauth/authorize
+    tokenUrl: https://coinvest.liquid.trade/oauth/token
+    scopes:
+      read: Market data, portfolio and account state
+      trade: Placing and managing orders, always behind an explicit human confirmation
+  endpoints:
+    authorization: https://coinvest.liquid.trade/oauth/authorize
+    token: https://coinvest.liquid.trade/oauth/token
+    registration: https://coinvest.liquid.trade/oauth/register
+    introspection: https://coinvest.liquid.trade/oauth/introspect
+  response_types_supported:
+  - code
+  grant_types_supported:
+  - authorization_code
+  - refresh_token
+  code_challenge_methods_supported:
+  - S256
+  token_endpoint_auth_methods_supported:
+  - client_secret_post
+  - none
+  challenge_observed: 'WWW-Authenticate: Bearer realm="mcp", resource_metadata="https://coinvest.liquid.trade/.well-known/oauth-protected-resource"
+    (HTTP 401, verified 2026-07-19)'
+authorization_boundaries:
+  granted:
+  - read market data, portfolio, positions, open orders and account state
+  - propose and, on explicit human confirmation, place and manage orders
+  never_granted:
+  - withdraw or transfer funds
+  - change account settings
+  - send an order without a Confirm tap
+  additional_gate: >-
+    First trade on a new account additionally requires the account to be funded and the trading agent
+    key to be approved in the browser; until then the server reports "Trading not enabled".
+  consent_warning: >-
+    Connections from MCP clients Liquid has not verified show an unverified-app warning on the sign-in
+    consent screen.
+end_user_authentication:
+  methods:
+  - email sign-in
+  - crypto wallet
+  source: https://docs.tryliquid.xyz/about-liquid/what-is-liquid
