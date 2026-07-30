@@ -1,0 +1,43 @@
+generated: '2026-07-19'
+method: searched
+source: https://coinvest.liquid.trade/.well-known/oauth-protected-resource
+docs: https://www.liquid.trade/coinvest-docs
+notes: >-
+  Not derived from OpenAPI — Liquid publishes no spec. Scopes are taken verbatim from the live
+  scopes_supported arrays in both the RFC 9728 protected-resource metadata and the RFC 8414
+  authorization-server metadata on coinvest.liquid.trade, with descriptions from the provider's
+  "Signing in & permissions" documentation.
+schemes:
+- name: CoInvestOAuth
+  source: https://coinvest.liquid.trade/.well-known/oauth-authorization-server
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://coinvest.liquid.trade/oauth/authorize
+    tokenUrl: https://coinvest.liquid.trade/oauth/token
+scopes:
+- scope: read
+  description: Market data, portfolio and account state — live prices, funding, open interest, positioning,
+    news, leaderboards, prediction markets, balances, open positions and resting orders.
+  flows:
+  - authorizationCode
+  consequence: read
+  sources:
+  - https://coinvest.liquid.trade/.well-known/oauth-protected-resource
+  - https://www.liquid.trade/coinvest-docs
+- scope: trade
+  description: Placing and managing orders — opening long/short positions, market and limit orders, TP/SL
+    attachment and modification, leverage changes, position closes, order cancels and prediction-market
+    orders. Always behind an explicit human Confirm tap in the client.
+  flows:
+  - authorizationCode
+  consequence: financial
+  human_in_the_loop: required
+  sources:
+  - https://coinvest.liquid.trade/.well-known/oauth-protected-resource
+  - https://www.liquid.trade/coinvest-docs
+excluded_by_design:
+- capability: withdraw or transfer funds
+  reason: No scope exists for it; the documentation states the connection can never move money out of
+    the account.
+- capability: change account settings
+  reason: No scope exists for it.

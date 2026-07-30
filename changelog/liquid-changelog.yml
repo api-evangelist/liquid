@@ -1,0 +1,53 @@
+generated: '2026-07-19'
+method: searched
+source: https://www.liquid.trade/changelog
+url: https://www.liquid.trade/changelog
+scheme: date-based (M.DD.YYYY), no semantic versions
+cadence: >-
+  Daily, presented as a day-by-day picker under the heading "What we shipped this week and every week."
+  Some days carry an additional "After hours" entry. Entries are grouped by surface (General, Mobile,
+  Web) and typed as Additions or Refinements, then tagged by area (Platform, Terminal, Funding, ...).
+coverage_observed:
+  earliest: '3.01.2026'
+  latest: '7.01.2026'
+  note: >-
+    The changelog is a live day picker; only the currently selected day renders its detail in the page
+    source. Recent-window entries captured below are the ones the site served on 2026-07-19. The
+    full day index observed spans 3.01.2026 through 7.01.2026 with near-daily entries.
+current: '7.01.2026'
+entries:
+- date: '2026-07-01'
+  label: '7.01.2026'
+  breaking: false
+  changes:
+  - surface: General
+    kind: Refinements
+    area: Platform
+    title: Better error handling
+    highlight: A redesigned error page and smoother recovery mean the app now handles unexpected errors
+      gracefully and gets you back on track faster.
+  - surface: General
+    kind: Refinements
+    area: Platform
+    title: General stability and performance improvements
+    highlight: Continued improvements to reliability, speed and overall polish across the platform.
+  - surface: Mobile
+    kind: Refinements
+    area: Terminal
+    title: Instant chart preview on iOS
+    highlight: A native chart with recent price data now appears instantly while the full interactive chart
+      loads.
+  - surface: Web
+    kind: Additions
+    area: Funding
+    title: Earn confirmation step
+    highlight: Depositing or withdrawing from Earn vaults now shows a confirmation step before executing.
+related_announcements:
+- date: '2026-04-27'
+  title: Liquid Raises $18M Series Seed
+  url: https://www.liquid.trade/series-seed-announcement
+  highlight: $18M Series Seed led by Neo and Left Lane Capital, with participation from fintech and crypto
+    angels and operators.
+- date: '2026-05-25'
+  title: Co-Invest MCP server published to the Smithery registry
+  url: https://smithery.ai/servers/coinvest/coinvest

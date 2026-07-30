@@ -1,0 +1,59 @@
+generated: '2026-07-19'
+method: generated
+source: https://www.liquid.trade/coinvest-docs
+notes: >-
+  Liquid publishes no OpenAPI, so these skills are not grounded in operationIds. They are grounded in
+  the documented capability surface of the Co-Invest MCP server (https://www.liquid.trade/coinvest-docs)
+  and in the live OAuth metadata on coinvest.liquid.trade. No tool names are invented: the server's
+  tools/list is OAuth-protected and no public tool schema is published, so each skill matches user
+  intent to a documented capability by name rather than calling a hard-coded identifier.
+skills:
+- file: liquid-connect-co-invest.md
+  name: Connect the Liquid Co-Invest MCP server
+  api: mcp/liquid-mcp.yml
+  scopes:
+  - read
+  - trade
+  capabilities:
+  - OAuth sign-in and consent
+  - account readiness check
+- file: liquid-research-a-market.md
+  name: Research a Liquid market before trading it
+  api: mcp/liquid-mcp.yml
+  scopes:
+  - read
+  capabilities:
+  - Market search
+  - Market analysis
+  - News
+  - Leaderboard & positioning pulse
+  - Prediction markets
+  - Price charts
+  - Order books
+  - Market overview
+- file: liquid-place-a-confirmed-trade.md
+  name: Propose and place a confirmed trade on Liquid
+  api: mcp/liquid-mcp.yml
+  scopes:
+  - read
+  - trade
+  human_in_the_loop: required
+  capabilities:
+  - Portfolio & positions
+  - Open orders
+  - Portfolio planning
+  - Place trades
+  - Manage positions
+  - Manage orders
+  - Prediction orders
+  - Deposits & conversions
+- file: liquid-paper-trade-dry-run.md
+  name: Dry-run the Liquid workflow in paper mode
+  api: mcp/liquid-mcp.yml
+  scopes:
+  - read
+  - trade
+  capabilities:
+  - paper mode toggle
+  - paper status
+  - paper reset

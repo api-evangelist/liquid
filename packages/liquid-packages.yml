@@ -1,0 +1,50 @@
+generated: '2026-07-19'
+method: searched
+source: https://registry.npmjs.org/
+notes: >-
+  Registries probed on 2026-07-19: npm, PyPI, RubyGems, Packagist, crates.io, pkg.go.dev, NuGet and
+  Maven Central. Liquid ships NO first-party client SDK in any language — its only programmable surface
+  is the OAuth-protected Co-Invest MCP server, which clients reach over HTTP with no vendor library.
+  The one first-party npm entry is a name reservation with no published code (version 0.0.0). Because
+  there is no real client library, NO `SDKs` pointer is emitted in apis.yml — emitting one would be
+  fabrication.
+packages:
+- language: javascript
+  registry: npm
+  name: coinvest
+  url: https://www.npmjs.com/package/coinvest
+  version: 0.0.0
+  description: Reserved package name for Liquid Co-Invest.
+  official: true
+  kind: name-reservation
+  usable: false
+  note: Placeholder release, no code published. Last modified 2026-05-28.
+third_party_tooling:
+  note: Not Liquid packages — general MCP tooling the provider's docs point users at.
+  packages:
+  - language: javascript
+    registry: npm
+    name: mcp-remote
+    url: https://www.npmjs.com/package/mcp-remote
+    install: npx mcp-remote https://coinvest.liquid.trade/mcp
+    official: false
+    note: Documented by Liquid as the stdio bridge for Claude Desktop / Claude Code.
+  - language: javascript
+    registry: npm
+    name: smithery
+    url: https://www.npmjs.com/package/smithery
+    install: npm install -g smithery
+    official: false
+    note: Smithery CLI; the Co-Invest server is listed as coinvest/coinvest.
+not_found:
+- registry: pypi
+- registry: rubygems
+- registry: packagist
+- registry: crates.io
+- registry: pkg.go.dev
+- registry: nuget
+- registry: maven-central
+disambiguation:
+  note: >-
+    npm `liquid-sdk` (Liquid-Protocol-Ops/SDK, ERC-20 deployment on Base) and the various `liquid`
+    template-engine packages are unrelated projects and are deliberately excluded.

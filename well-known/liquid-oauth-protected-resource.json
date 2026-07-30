@@ -1,0 +1,1 @@
+{"resource":"https://coinvest.liquid.trade/mcp","authorization_servers":["https://coinvest.liquid.trade"],"scopes_supported":["read","trade"],"resource_name":"Liquid Co-Invest MCP","bearer_methods_supported":["header"]}

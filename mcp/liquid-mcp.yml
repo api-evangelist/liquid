@@ -1,0 +1,132 @@
+generated: '2026-07-19'
+method: searched
+status: published
+source: https://www.liquid.trade/coinvest-docs
+server:
+  name: Liquid Co-Invest
+  resource_name: Liquid Co-Invest MCP
+  transport: http
+  url: https://coinvest.liquid.trade/mcp
+  alternate_url: https://coinvest.liquid.trade
+  docs: https://www.liquid.trade/coinvest-docs
+  overview: https://www.liquid.trade/coinvest
+  notes: >-
+    The provider documents both https://coinvest.liquid.trade and https://coinvest.liquid.trade/mcp as
+    valid server addresses; clients should use whichever form they expect. An unauthenticated POST to
+    /mcp returns HTTP 401 with a WWW-Authenticate: Bearer challenge carrying
+    resource_metadata=https://coinvest.liquid.trade/.well-known/oauth-protected-resource (verified 2026-07-19).
+authorization:
+  scheme: oauth2
+  profile: OAuth 2.1 (authorization code + PKCE S256, dynamic client registration)
+  protected_resource_metadata: https://coinvest.liquid.trade/.well-known/oauth-protected-resource
+  authorization_server_metadata: https://coinvest.liquid.trade/.well-known/oauth-authorization-server
+  scopes:
+  - read
+  - trade
+  bearer_methods_supported:
+  - header
+registries:
+- name: Smithery
+  url: https://smithery.ai/servers/coinvest/coinvest
+  id: coinvest/coinvest
+  published: '2026-05-25'
+  observed:
+    uptime_30d: 99.9%
+    latency_p50_30d: 149ms
+    daily_sessions: 305
+- name: ChatGPT app directory
+  url: https://chatgpt.com/plugins/plugin_asdk_app_6a20e26c6ab8819191519e2811e03522
+  note: Listed as the "Co-Invest" app; directory URL requires a ChatGPT session (403 unauthenticated).
+- name: Claude custom connector
+  url: https://claude.ai/customize/connectors?modal=add-custom-connector&connectorName=Co-Invest&connectorUrl=https%3A%2F%2Fcoinvest.liquid.trade
+clients_documented:
+- client: ChatGPT
+  method: app directory — Connect and approve access to the Liquid account
+- client: Claude
+  method: Settings > Connectors > Add custom connector, server URL https://coinvest.liquid.trade
+- client: Claude Desktop / Claude Code (stdio)
+  method: 'bridge via mcp-remote: npx mcp-remote https://coinvest.liquid.trade/mcp'
+- client: Cursor and other remote-MCP clients
+  method: add https://coinvest.liquid.trade/mcp to .cursor/mcp.json or the MCP settings UI
+- client: iMessage
+  method: https://www.liquid.trade/coinvest-imessage
+capabilities:
+  note: >-
+    Liquid does not publish a machine-readable tools/list (the endpoint is OAuth-protected and the
+    Smithery listing records no public tool schema). The groups below are transcribed verbatim in
+    substance from the provider's own Co-Invest documentation "What Co-Invest can do" section — they are
+    documented capabilities, not scraped tool names. Do not treat these as literal MCP tool identifiers.
+  groups:
+  - group: Research & analysis
+    scope: read
+    capabilities:
+    - name: Market analysis
+      description: Live price, funding rate, open interest and proprietary positioning for any tradeable
+        asset — whale exposure by size tier, behavioral cohorts and liquidation clusters.
+    - name: Market search
+      description: Browse or search everything tradeable on Liquid across crypto, stocks, commodities,
+        FX and indices.
+    - name: News
+      description: Recent market headlines with sources, cross-referenced against positioning data to
+        find catalysts.
+    - name: Leaderboard & positioning pulse
+      description: What top Liquid traders hold — rank, PnL, directional bias, largest positions — plus
+        the day's biggest positioning themes.
+    - name: Prediction markets
+      description: Search event contracts with YES/NO outcomes and live probabilities.
+  - group: Portfolio
+    scope: read
+    capabilities:
+    - name: Portfolio & positions
+      description: Balance, equity, margin and every open position with live PnL.
+    - name: Open orders
+      description: Resting limit orders and take-profit / stop-loss triggers, with the IDs needed to change
+        or cancel them.
+    - name: Deposits & conversions
+      description: Generate a deposit address to fund the account, or convert between balances.
+    - name: Portfolio planning
+      description: Multi-position allocation plans based on risk tolerance, time horizon and preferred
+        asset classes, proposed as a batch confirmed in one tap.
+  - group: Trading
+    scope: trade
+    human_confirmation: required
+    capabilities:
+    - name: Place trades
+      description: Long or short, market or limit, with optional leverage and attached take-profit / stop-loss;
+        single trades or a basket of several at once.
+    - name: Manage positions
+      description: Add, change or remove TP/SL on an open position, adjust leverage, or close positions
+        — one, several or all at once.
+    - name: Manage orders
+      description: Cancel resting orders by ID.
+    - name: Prediction orders
+      description: Take a YES/NO side on event contracts and close those positions later.
+  - group: Charts & visuals
+    scope: read
+    capabilities:
+    - name: Price charts
+      description: OHLCV charts for any symbol at a chosen interval, rendered inline in the chat.
+    - name: Order books
+      description: Bid/ask depth for spot-checking liquidity.
+    - name: Market overview
+      description: Sortable dashboard of all markets with price, funding, open interest and volume.
+    - name: Portfolio allocation
+      description: Breakdown of positions by notional value.
+safety_model:
+  human_in_the_loop: >-
+    Every state-changing action (place trade, modify TP/SL, change leverage, close position) renders a
+    confirmation card in the chat showing symbol, direction, size, leverage, TP/SL and rationale; nothing
+    is sent until the human taps Confirm. Batches are a single explicit tap.
+  cannot:
+  - withdraw or transfer funds
+  - change account settings
+  - place an order without an explicit Confirm tap
+  custody: non-custodial — funds sit in the user's own wallet, not on a Liquid server
+  validation: >-
+    Proposals are sanity-checked; for example a stop-loss at or past the liquidation price is rejected
+    rather than placed.
+  paper_mode: see sandbox/liquid-sandbox.yml
+commercial:
+  server_cost: free — no subscription, no AI surcharge, no spread markup
+  trading_fees: https://docs.tryliquid.xyz/trading/fees
+  minimum_collateral_per_order: $15

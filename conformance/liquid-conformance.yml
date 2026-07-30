@@ -1,0 +1,85 @@
+generated: '2026-07-19'
+method: searched
+source: https://coinvest.liquid.trade/.well-known/oauth-authorization-server
+notes: >-
+  Assertions are grounded in live metadata documents and observed HTTP behaviour on the Co-Invest MCP
+  host, plus the provider's own documentation. Liquid publishes no OpenAPI, so no spec-derived
+  assertions are made. Absence of a standard is recorded as conforms:false, not as a gap claim.
+standards:
+- id: mcp
+  name: Model Context Protocol
+  conforms: true
+  evidence: Provider documents Co-Invest as an MCP server at https://coinvest.liquid.trade/mcp, connectable
+    from ChatGPT, Claude, Claude Desktop/Code via mcp-remote, and Cursor; listed on Smithery as coinvest/coinvest.
+- id: oauth2
+  name: OAuth 2.0 / 2.1 authorization code
+  conforms: true
+  evidence: authorization_endpoint + token_endpoint published; grant_types_supported [authorization_code,
+    refresh_token]; response_types_supported [code].
+- id: rfc7636-pkce
+  name: RFC 7636 Proof Key for Code Exchange
+  conforms: true
+  evidence: code_challenge_methods_supported [S256]
+- id: rfc8414-as-metadata
+  name: RFC 8414 OAuth 2.0 Authorization Server Metadata
+  conforms: true
+  evidence: https://coinvest.liquid.trade/.well-known/oauth-authorization-server returns 200
+- id: rfc9728-protected-resource-metadata
+  name: RFC 9728 OAuth 2.0 Protected Resource Metadata
+  conforms: true
+  evidence: https://coinvest.liquid.trade/.well-known/oauth-protected-resource returns 200 and is advertised
+    in the WWW-Authenticate challenge on a 401
+- id: rfc7591-dynamic-client-registration
+  name: RFC 7591 OAuth 2.0 Dynamic Client Registration
+  conforms: true
+  evidence: registration_endpoint https://coinvest.liquid.trade/oauth/register published in AS metadata
+- id: rfc7662-token-introspection
+  name: RFC 7662 OAuth 2.0 Token Introspection
+  conforms: true
+  evidence: introspection_endpoint https://coinvest.liquid.trade/oauth/introspect published in AS metadata
+- id: rfc6750-bearer
+  name: RFC 6750 Bearer Token Usage
+  conforms: true
+  evidence: bearer_methods_supported [header]; 401 response carries WWW-Authenticate Bearer realm="mcp"
+- id: llmstxt
+  name: llms.txt
+  conforms: true
+  evidence: https://docs.liquid.trade/llms.txt returns 200 (saved verbatim at llms/liquid-llms.txt)
+- id: oidc
+  name: OpenID Connect Discovery
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 on every Liquid host probed
+- id: rfc9116-security-txt
+  name: RFC 9116 security.txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on www.liquid.trade, app.liquid.trade, docs.tryliquid.xyz
+    and coinvest.liquid.trade
+- id: rfc9457-problem-details
+  name: RFC 9457 Problem Details for HTTP APIs
+  conforms: false
+  evidence: Observed error body is a flat {"error","message","resource_metadata"} object, not application/problem+json
+- id: rfc8594-sunset-header
+  name: RFC 8594 Sunset header
+  conforms: false
+  evidence: No deprecation or sunset policy published
+- id: openapi
+  name: OpenAPI
+  conforms: false
+  evidence: No OpenAPI or Swagger document published; /openapi.json and /openapi.yaml return 404 on the
+    docs host
+- id: asyncapi
+  name: AsyncAPI
+  conforms: false
+  evidence: No webhook, streaming or event-subscription surface is published
+security_audits:
+- auditor: Zellic
+  scope: Smart contract security audit
+  subject: LiquidMax
+  report: https://www.liquid.trade/LiquidMax-Zellic-Audit-Report.pdf
+  index: https://www.liquid.trade/audits
+compliance_certifications:
+  published: false
+  note: >-
+    No SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP or GDPR/CCPA certification claims were found on the
+    marketing site, terms of service or privacy policy as of 2026-07-19. No Compliance pointer is
+    emitted in apis.yml.

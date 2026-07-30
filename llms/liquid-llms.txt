@@ -1,0 +1,22 @@
+# Liquid Docs
+
+## Product Docs
+
+- [What is Liquid?](https://docs.tryliquid.xyz/about-liquid/what-is-liquid.md): Trade Anything, Anywhere, Any Time
+- [Liquid Team](https://docs.tryliquid.xyz/about-liquid/team.md)
+- [What are Perpetual Futures?](https://docs.tryliquid.xyz/about-liquid/what-are-perpetual-futures.md)
+- [Quickstart Guide](https://docs.tryliquid.xyz/about-liquid/quickstart-guide.md)
+- [Fees](https://docs.tryliquid.xyz/trading/fees.md)
+- [TP / SL](https://docs.tryliquid.xyz/trading/take-profit-stop-loss.md): Manage your risk with Take Profits and Stop Losses
+- [TWAP](https://docs.tryliquid.xyz/trading/twap.md): Minimize price slippage with TWAP orders on Liquid.
+- [Leverage](https://docs.tryliquid.xyz/trading/leverage.md)
+- [Funding Rates](https://docs.tryliquid.xyz/trading/funding-rates.md)
+- [Liquidations](https://docs.tryliquid.xyz/trading/liquidations.md)
+- [Points](https://docs.tryliquid.xyz/trading/points.md): A brief description of how Liquid rewards early contributors to the platform
+- [What are Vaults](https://docs.tryliquid.xyz/vaults/what-are-vaults.md)
+- [What is HLP?](https://docs.tryliquid.xyz/vaults/what-is-hlp.md)
+- [Referral Bonuses](https://docs.tryliquid.xyz/referrals/referral-bonuses.md)
+- [Rewards Hub](https://docs.tryliquid.xyz/referrals/rewards-hub.md)
+- [Refer Traders](https://docs.tryliquid.xyz/referrals/refer-traders.md)
+- [Claim Rewards](https://docs.tryliquid.xyz/referrals/claim-rewards.md)
+- [FAQ](https://docs.tryliquid.xyz/faq.md): Frequently Asked Questions

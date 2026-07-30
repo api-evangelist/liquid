@@ -1,0 +1,44 @@
+generated: '2026-07-19'
+method: searched
+source: https://www.liquid.trade/changelog
+notes: >-
+  Probed for a status page, SLA, deprecation policy and versioning policy on 2026-07-19. Liquid ships a
+  daily dated changelog but publishes none of the other four. Absence is recorded honestly; no StatusPage
+  or Deprecation pointers are emitted in apis.yml because neither page exists.
+versioning:
+  scheme: date-based release log (no product or API version numbers published)
+  current: '7.01.2026'
+  docs: https://www.liquid.trade/changelog
+  api_versioning: not applicable — no public REST API; the MCP endpoint is unversioned in its path
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: not documented
+sla:
+  url: null
+  uptime_target: null
+  third_party_observed:
+    source: https://smithery.ai/servers/coinvest/coinvest
+    mcp_uptime_30d: 99.9%
+    mcp_latency_p50_30d: 149ms
+    note: Observed by the Smithery registry, not an SLA committed by Liquid.
+status_page: null
+status_page_probes:
+- url: https://status.liquid.trade
+  result: NXDOMAIN
+- url: https://liquid.statuspage.io
+  result: redirects to atlassian.com (not a Liquid status page)
+release_cadence:
+  frequency: daily, plus "After hours" supplemental entries
+  earliest_entry_observed: '3.01.2026'
+  latest_entry_observed: '7.01.2026'
+  detail: changelog/liquid-changelog.yml
+deprecated_operations: []
+support_channels:
+- type: live chat
+  url: https://www.liquid.trade/support
+- type: discord
+  url: https://discord.gg/liquidtrading
+  note: The Co-Invest docs name Discord as the primary support channel.
+- type: telegram
+  url: https://t.me/liquid_perps

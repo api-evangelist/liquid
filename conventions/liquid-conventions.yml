@@ -1,0 +1,95 @@
+generated: '2026-07-19'
+method: searched
+source: https://www.liquid.trade/coinvest-docs
+notes: >-
+  Liquid exposes no public REST API and no OpenAPI, so these conventions describe the only programmable
+  surface it publishes: the Co-Invest remote MCP server. Fields the provider does not document are
+  recorded as "not documented" rather than guessed.
+authentication:
+  style: OAuth 2.1 bearer token in the Authorization header
+  scopes:
+  - read
+  - trade
+  discovery: RFC 9728 protected-resource metadata + RFC 8414 authorization-server metadata
+  dynamic_client_registration: true
+  detail: authentication/liquid-authentication.yml
+transport:
+  protocol: Model Context Protocol
+  binding: streamable HTTP
+  endpoint: https://coinvest.liquid.trade/mcp
+  alternate_endpoint: https://coinvest.liquid.trade
+  stdio_bridge: npx mcp-remote https://coinvest.liquid.trade/mcp
+  session_header_exposed: mcp-session-id
+  cors: 'access-control-allow-origin: * with access-control-expose-headers: mcp-session-id (observed 2026-07-19)'
+human_confirmation:
+  required_for:
+  - placing a trade (single or batch)
+  - modifying take-profit / stop-loss
+  - changing leverage
+  - closing a position
+  mechanism: >-
+    The client renders a confirmation card showing symbol, direction, size, leverage, any TP/SL and a
+    short rationale. Tap Confirm to send, Cancel to discard. A batch of proposals is one explicit tap.
+  server_side_validation:
+  - A stop-loss at or past the liquidation price is rejected instead of placed.
+  - Proposals are sized against the live account balance and the order minimums.
+idempotency:
+  supported: not documented
+  note: >-
+    Liquid documents no idempotency key, retry contract or replay window for the MCP surface. Safety is
+    enforced by the mandatory human confirmation card rather than by an idempotency key. No Idempotency
+    pointer is emitted in apis.yml because the provider does not publish an idempotency contract.
+pagination:
+  documented: false
+  note: The MCP capability surface is described functionally (search markets, list positions, list open
+    orders); no pagination parameters or cursors are published.
+identifiers:
+  orders: Open orders are returned with the IDs needed to change or cancel them (order cancellation is
+    by ID).
+  symbols: >-
+    Market symbols follow the app's routing convention — bare tickers for crypto perps (BTC, ETH, SOL,
+    HYPE, SUI, LINK, DOGE, XRP, BNB) and an "xyz:" prefix for non-crypto markets (xyz:TSLA, xyz:NVDA,
+    xyz:GOLD, xyz:EUR, xyz:NDX), as seen in the app.liquid.trade/trade/<symbol> deep links.
+error_handling:
+  envelope: >-
+    Transport-level errors use a flat JSON object. The observed unauthenticated response is
+    {"error":"unauthorized","message":"OAuth bearer token required.","resource_metadata":"..."} with
+    HTTP 401 and a WWW-Authenticate Bearer challenge.
+  rfc9457: false
+  catalog_published: false
+  documented_failure_modes:
+  - condition: Connector will not connect
+    guidance: Verify the server URL is exactly https://coinvest.liquid.trade and re-run sign-in; remove
+      and re-add the connector if a failed attempt was cached.
+  - condition: Unverified-app warning on the consent screen
+    guidance: Expected for MCP clients Liquid has not verified; read the consent screen before continuing.
+  - condition: '"Trading not enabled" on first trade'
+    guidance: The account is not funded, or the trading agent key has not been approved. The assistant
+      detects which and walks the user through a deposit or a browser re-authorization.
+rate_limits:
+  documented: false
+  note: No published request-rate limits for the MCP server. Economic limits apply instead — see limits
+    below.
+limits:
+  minimum_collateral_per_order: '$15'
+  leverage: up to 50x multipliers; crypto perpetuals up to 40x; maximum varies by market and asset class
+  minimum_position_scaling: $15 collateral at 5x is a $75 position, at 10x a $150 position
+versioning:
+  scheme: not documented for the MCP surface
+  release_cadence: daily, published as a dated changelog (see changelog/liquid-changelog.yml)
+custody:
+  model: non-custodial — funds sit in the user's own wallet, not on a Liquid server
+  agent_key: A trading agent key must be approved before the MCP connection can place orders.
+fees:
+  docs: https://docs.tryliquid.xyz/trading/fees
+  summary: >-
+    5 bps (0.05%) uniform taker fee on perpetual futures; no additional Liquid fee on spot beyond the
+    routing venue's (Hyperliquid) own. Tiered on rolling 14-day weighted volume, assessed daily at UTC
+    close, with maker rebates paid continuously. Co-Invest itself adds no subscription, AI surcharge or
+    spread markup.
+cross_references:
+  authentication: authentication/liquid-authentication.yml
+  scopes: scopes/liquid-scopes.yml
+  sandbox: sandbox/liquid-sandbox.yml
+  lifecycle: lifecycle/liquid-lifecycle.yml
+  mcp: mcp/liquid-mcp.yml

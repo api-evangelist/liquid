@@ -1,0 +1,75 @@
+generated: '2026-07-19'
+method: searched
+source: https://coinvest.liquid.trade/.well-known/oauth-protected-resource
+notes: >-
+  Probed the /.well-known/ discovery surface on every Liquid host on 2026-07-19. Only the Co-Invest MCP
+  host publishes discovery documents; the marketing, app and docs hosts return 404 for all five probed
+  paths. tryliquid.xyz redirects to www.liquid.trade and docs.liquid.trade redirects to docs.tryliquid.xyz.
+hosts:
+- host: https://coinvest.liquid.trade
+  documents:
+  - path: /.well-known/oauth-protected-resource
+    standard: RFC 9728 OAuth 2.0 Protected Resource Metadata
+    status: 200
+    file: liquid-oauth-protected-resource.json
+  - path: /.well-known/oauth-authorization-server
+    standard: RFC 8414 OAuth 2.0 Authorization Server Metadata
+    status: 200
+    file: liquid-oauth-authorization-server.json
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://www.liquid.trade
+  documents:
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://app.liquid.trade
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+- host: https://docs.tryliquid.xyz
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+other_discovery:
+- path: /llms.txt
+  host: https://docs.liquid.trade
+  status: 200
+  file: ../llms/liquid-llms.txt
+- path: /robots.txt
+  host: https://www.liquid.trade
+  status: 200
+  note: >-
+    Explicitly enumerates 30+ AI crawler user-agents (GPTBot, ClaudeBot, Claude-User, PerplexityBot,
+    Google-Extended, Applebot-Extended, CCBot, Meta-ExternalAgent, MistralAI-User and others), allowing
+    all of them site-wide and disallowing only /api/.
+- path: /sitemap.xml
+  host: https://www.liquid.trade
+  status: 200
