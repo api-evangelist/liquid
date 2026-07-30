@@ -1,9 +1,29 @@
 aid: liquid
 name: Liquid
-description: 'Liquid is a company surfaced as a portfolio company of paradigm, techstars and added to
-  the API Evangelist network as a stub for enrichment. Sector: crypto-defi. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: 'Liquid (liquid.trade, formerly tryliquid.xyz) is a perpetual-futures trading platform and
+  perp-DEX aggregator that lets retail traders go long or short on 500+ markets — crypto perps, US and
+  international equities, commodities, FX, indices, pre-IPO names such as OpenAI, Anthropic and SpaceX,
+  and event/prediction contracts — 24/7 with up to 50x multipliers, routing orders through venues including
+  Hyperliquid while keeping funds in the user''s own non-custodial wallet. Its programmable surface is
+  Co-Invest, a published remote Model Context Protocol (MCP) server at coinvest.liquid.trade that puts
+  market research, portfolio state and confirmed trade execution inside Claude, ChatGPT, Cursor and any
+  MCP-compatible client, secured with OAuth 2.1 (PKCE + dynamic client registration) and two scopes, read
+  and trade. Liquid raised an $18M Series Seed led by Neo and Left Lane Capital in April 2026, following
+  a $7.6M seed led by Paradigm.'
 url: https://raw.githubusercontent.com/api-evangelist/liquid/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.liquid.trade/images/liquid-icon.svg
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
@@ -13,16 +33,120 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
 - Crypto Defi
-apis: []
+- Trading
+- Perpetual Futures
+- Prediction Markets
+- Fintech
+- MCP
+- Agentic Commerce
+- OAuth
+apis:
+- aid: liquid:co-invest-mcp
+  name: Liquid Co-Invest MCP
+  description: 'Co-Invest is Liquid delivered as a remote Model Context Protocol (MCP) server. Once connected,
+    an MCP client can research markets (live prices, funding rates, open interest, whale positioning, liquidation
+    maps, news, leaderboards, prediction markets), read the connected account''s portfolio, orders and
+    balances, and propose real trades on the user''s Liquid account. Every state-changing action renders
+    a confirmation card that the human must tap before an order is sent. Authorization is OAuth 2.1 with
+    PKCE and dynamic client registration, scoped read and trade; the connection can never withdraw or transfer
+    funds. A paper-trading mode runs a simulated $10,000 balance against live market data.'
+  humanURL: https://www.liquid.trade/coinvest-docs
+  baseURL: https://coinvest.liquid.trade/mcp
+  image: https://www.liquid.trade/images/liquid-icon.svg
+  tags:
+  - MCP
+  - Trading
+  - Market Data
+  - Prediction Markets
+  properties:
+  - type: MCPServer
+    url: mcp/liquid-mcp.yml
+  - type: Documentation
+    url: https://www.liquid.trade/coinvest-docs
+  - type: OAuthScopes
+    url: scopes/liquid-scopes.yml
+  - type: Authentication
+    url: authentication/liquid-authentication.yml
+  - type: Sandbox
+    url: sandbox/liquid-sandbox.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/liquid-domain-security.yml
 - type: Website
   url: https://tryliquid.xyz
+- type: DeveloperPortal
+  url: https://www.liquid.trade/coinvest
+- type: Documentation
+  url: https://docs.liquid.trade
+- type: APIReference
+  url: https://www.liquid.trade/coinvest-docs
+- type: GettingStarted
+  url: https://docs.tryliquid.xyz/about-liquid/quickstart-guide
+- type: Support
+  url: https://www.liquid.trade/support
+- type: Blog
+  url: https://www.liquid.trade/learn
+- type: SignUp
+  url: https://app.liquid.trade/?login=true
+- type: Pricing
+  url: https://docs.tryliquid.xyz/trading/fees
+- type: TermsOfService
+  url: https://www.liquid.trade/termsofservice
+- type: PrivacyPolicy
+  url: https://www.liquid.trade/privacy
+- type: ChangeLog
+  url: https://www.liquid.trade/changelog
+- type: ChangeLog
+  url: changelog/liquid-changelog.yml
+- type: SecurityAudit
+  url: https://www.liquid.trade/audits
+- type: Discord
+  url: https://discord.gg/liquidtrading
+- type: Telegram
+  url: https://t.me/liquid_perps
+- type: Twitter
+  url: https://x.com/liquidtrading
+- type: LinkedIn
+  url: https://www.linkedin.com/company/107723236
+- type: YouTube
+  url: https://www.youtube.com/@Liquid-Perps
+- type: Careers
+  url: https://jobs.ashbyhq.com/liquid
+- type: BrandKit
+  url: https://www.liquid.trade/brand
+- type: MCPServer
+  url: mcp/liquid-mcp.yml
+- type: WellKnown
+  url: well-known/liquid-well-known.yml
+- type: LLMsTxt
+  url: llms/liquid-llms.txt
+- type: OAuthScopes
+  url: scopes/liquid-scopes.yml
+- type: Authentication
+  url: authentication/liquid-authentication.yml
+- type: Conventions
+  url: conventions/liquid-conventions.yml
+- type: Conformance
+  url: conformance/liquid-conformance.yml
+- type: Lifecycle
+  url: lifecycle/liquid-lifecycle.yml
+- type: Sandbox
+  url: sandbox/liquid-sandbox.yml
+- type: Packages
+  url: packages/liquid-packages.yml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
