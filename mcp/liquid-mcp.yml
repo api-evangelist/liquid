@@ -10,11 +10,10 @@ server:
   alternate_url: https://coinvest.liquid.trade
   docs: https://www.liquid.trade/coinvest-docs
   overview: https://www.liquid.trade/coinvest
-  notes: >-
-    The provider documents both https://coinvest.liquid.trade and https://coinvest.liquid.trade/mcp as
-    valid server addresses; clients should use whichever form they expect. An unauthenticated POST to
-    /mcp returns HTTP 401 with a WWW-Authenticate: Bearer challenge carrying
-    resource_metadata=https://coinvest.liquid.trade/.well-known/oauth-protected-resource (verified 2026-07-19).
+  notes: 'The provider documents both https://coinvest.liquid.trade and https://coinvest.liquid.trade/mcp
+    as valid server addresses; clients should use whichever form they expect. An unauthenticated POST
+    to /mcp returns HTTP 401 with a WWW-Authenticate: Bearer challenge carrying resource_metadata=https://coinvest.liquid.trade/.well-known/oauth-protected-resource
+    (verified 2026-07-19).'
 authorization:
   scheme: oauth2
   profile: OAuth 2.1 (authorization code + PKCE S256, dynamic client registration)
@@ -51,11 +50,10 @@ clients_documented:
 - client: iMessage
   method: https://www.liquid.trade/coinvest-imessage
 capabilities:
-  note: >-
-    Liquid does not publish a machine-readable tools/list (the endpoint is OAuth-protected and the
-    Smithery listing records no public tool schema). The groups below are transcribed verbatim in
-    substance from the provider's own Co-Invest documentation "What Co-Invest can do" section — they are
-    documented capabilities, not scraped tool names. Do not treat these as literal MCP tool identifiers.
+  note: Liquid does not publish a machine-readable tools/list (the endpoint is OAuth-protected and the
+    Smithery listing records no public tool schema). The groups below are transcribed verbatim in substance
+    from the provider's own Co-Invest documentation "What Co-Invest can do" section — they are documented
+    capabilities, not scraped tool names. Do not treat these as literal MCP tool identifiers.
   groups:
   - group: Research & analysis
     scope: read
@@ -113,20 +111,25 @@ capabilities:
     - name: Portfolio allocation
       description: Breakdown of positions by notional value.
 safety_model:
-  human_in_the_loop: >-
-    Every state-changing action (place trade, modify TP/SL, change leverage, close position) renders a
-    confirmation card in the chat showing symbol, direction, size, leverage, TP/SL and rationale; nothing
-    is sent until the human taps Confirm. Batches are a single explicit tap.
+  human_in_the_loop: Every state-changing action (place trade, modify TP/SL, change leverage, close position)
+    renders a confirmation card in the chat showing symbol, direction, size, leverage, TP/SL and rationale;
+    nothing is sent until the human taps Confirm. Batches are a single explicit tap.
   cannot:
   - withdraw or transfer funds
   - change account settings
   - place an order without an explicit Confirm tap
   custody: non-custodial — funds sit in the user's own wallet, not on a Liquid server
-  validation: >-
-    Proposals are sanity-checked; for example a stop-loss at or past the liquidation price is rejected
-    rather than placed.
+  validation: Proposals are sanity-checked; for example a stop-loss at or past the liquidation price is
+    rejected rather than placed.
   paper_mode: see sandbox/liquid-sandbox.yml
 commercial:
   server_cost: free — no subscription, no AI surcharge, no spread markup
   trading_fees: https://docs.tryliquid.xyz/trading/fees
   minimum_collateral_per_order: $15
+deployment:
+  mode: remote
+  endpoint: https://coinvest.liquid.trade/mcp
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census
