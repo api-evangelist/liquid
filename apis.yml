@@ -43,6 +43,16 @@ tags:
 - Fintech
 - MCP
 - Agentic Commerce
+- Authentication
+tags_raw:
+- Company
+- Crypto Defi
+- Trading
+- Perpetual Futures
+- Prediction Markets
+- Fintech
+- MCP
+- Agentic Commerce
 - OAuth
 apis:
 - aid: liquid:co-invest-mcp
