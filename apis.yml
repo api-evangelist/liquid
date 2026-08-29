@@ -11,6 +11,17 @@ description: 'Liquid (liquid.trade, formerly tryliquid.xyz) is a perpetual-futur
   and trade. Liquid raised an $18M Series Seed led by Neo and Left Lane Capital in April 2026, following
   a $7.6M seed led by Paradigm.'
 url: https://raw.githubusercontent.com/api-evangelist/liquid/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
