@@ -32,6 +32,7 @@ accessModel:
   confidence: medium
   source:
   - authentication
+  - {url: 'https://tryliquid.xyz', status: 307, note: 'declared website redirects to https://www.liquid.trade/ — a different registrable domain (tryliquid.xyz -> liquid.trade), possible rename or acquisition (probed 2026-09-03, roadmap#169)'}
   generated: '2026-07-22'
   method: derived
 image: https://www.liquid.trade/images/liquid-icon.svg
