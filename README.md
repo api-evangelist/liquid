@@ -64,44 +64,108 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Liquid (**liquid.trade**, formerly tryliquid.xyz) is a perpetual-futures trading platform and perp-DEX
-aggregator. Traders go long or short on 500+ markets — crypto perps, US and international equities,
-commodities, FX, indices, pre-IPO names like OpenAI, Anthropic and SpaceX, and event/prediction contracts
-— 24/7 with up to 50x multipliers, routed through venues including Hyperliquid, with funds held in the
-user's own non-custodial wallet.
+Liquid (liquid.trade, formerly tryliquid.xyz) is a perpetual-futures trading platform and perp-DEX aggregator that lets retail traders go long or short on 500+ markets — crypto perps, US and international equities, commodities, FX, indices, pre-IPO names such as OpenAI, Anthropic and SpaceX, and event/prediction contracts — 24/7 with up to 50x multipliers, routing orders through venues including Hyperliquid while keeping funds in the user's own non-custodial wallet. Its programmable surface is Co-Invest, a published remote Model Context Protocol (MCP) server at coinvest.liquid.trade that puts market research, portfolio state and confirmed trade execution inside Claude, ChatGPT, Cursor and any MCP-compatible client, secured with OAuth 2.1 (PKCE + dynamic client registration) and two scopes, read and trade. Liquid raised an $18M Series Seed led by Neo and Left Lane Capital in April 2026, following a $7.6M seed led by Paradigm.
 
-Liquid raised an **$18M Series Seed** led by Neo and Left Lane Capital in April 2026, following a $7.6M
-seed led by Paradigm.
+**Areas:** Company · Crypto Defi · Trading · Perpetual Futures · Prediction Markets · Fintech · MCP · Agentic Commerce · Authentication
 
-## Programmable surface
+## Liquid on APIs.io
 
-Liquid publishes **no public REST API and no OpenAPI**. Its entire programmable surface is **Co-Invest**,
-a published remote **MCP server** at `https://coinvest.liquid.trade/mcp` that puts market research,
-portfolio state and confirmed trade execution inside Claude, ChatGPT, Cursor, iMessage and any
-MCP-compatible client.
+Everything profiled for Liquid is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/liquid/](https://apis.io/providers/liquid/)** — or go straight to one of the APIs or properties below.
 
-- OAuth 2.1 — authorization code + PKCE (S256) + dynamic client registration, with RFC 8414 and RFC 9728
-  discovery documents live on the MCP host.
-- Two scopes: `read` and `trade`. The grant can never withdraw funds or change account settings.
-- Every state-changing action renders a confirmation card; nothing executes without a human tap.
-- Paper mode: a simulated $10,000 balance against live market data.
+### APIs (1)
 
-## Artifacts
+- [Liquid Co-Invest MCP](https://apis.io/apis/liquid/co-invest-mcp/) — Co-Invest is Liquid delivered as a remote Model Context Protocol (MCP) server. Once connected, an MCP client can research markets (live prices, funding…
 
-| Dir | Artifact |
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [Liquid Co-Invest](https://apis.io/servers/liquid/liquid-co-invest/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Liquid Authentication](https://apis.io/security/liquid/liquid-authentication/)
+- [Liquid Domain Security](https://apis.io/security/liquid/liquid-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Liquid Scopes](https://apis.io/scopes/liquid/liquid-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://tryliquid.xyz)
+- [Documentation](https://docs.liquid.trade)
+- [Getting started](https://docs.tryliquid.xyz/about-liquid/quickstart-guide)
+- [API reference](https://www.liquid.trade/coinvest-docs)
+- [Pricing](https://docs.tryliquid.xyz/trading/fees)
+- [Sign up](https://app.liquid.trade/?login=true)
+- [Support](https://www.liquid.trade/support)
+- [Changelog](https://www.liquid.trade/changelog)
+- [Blog](https://www.liquid.trade/learn)
+- [Terms of service](https://www.liquid.trade/termsofservice)
+- [Privacy policy](https://www.liquid.trade/privacy)
+
+## API Evangelist rating
+
+**Kin Score 35.7** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
 |---|---|
-| `mcp/` | Co-Invest MCP server manifest (searched) |
-| `well-known/` | RFC 9728 + RFC 8414 metadata, saved verbatim |
-| `llms/` | `llms.txt` from docs.liquid.trade, saved verbatim |
-| `authentication/` | OAuth 2.1 profile |
-| `scopes/` | `read` / `trade` scope reference |
-| `conventions/` | MCP transport, confirmation model, limits, error shape |
-| `conformance/` | Standards conformance + Zellic audit record |
-| `sandbox/` | Paper-trading mode |
-| `changelog/` | Daily dated changelog |
-| `lifecycle/` | Versioning, cadence, support; no status page or deprecation policy published |
-| `packages/` | Registry sweep — no first-party SDK exists |
-| `security/` | Domain security probe (TLS/HSTS/DNSSEC/CAA/SPF/DMARC) |
-| `skills/` | Four Agent Skills for the Co-Invest surface |
+| Discoverability | 75.0 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 15.8 |
+| Developer ergonomics | 66.1 |
+| Access clarity | 44.7 |
 
-Backed by: paradigm, techstars — https://www.liquid.trade
+**Agent readiness 28.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 32.4** — Securities & Market Data
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/liquid/](https://apis.io/providers/liquid/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Liquid: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/liquid/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
